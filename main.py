@@ -1,13 +1,13 @@
 from sword import Sword
 from bow import Bow
+from enemy import Enemy
 
-MONSTER_START_HEALTH = 100
-MIN_MONSTER_HEALTH = 0
-SWORD_DAMAGE = 15
-BOW_DAMAGE = 10
+ENEMY_START_HEALTH = 100
+MIN_ENEMY_HEALTH = 0
+
 UNKNOWN_COMMAND_MESSAGE = 'Неизвестная команда. Попробуйте снова'
 
-monster_health = MONSTER_START_HEALTH
+enemy = Enemy(ENEMY_START_HEALTH)
 
 commands = {
     '1': 'Атаковать мечом',
@@ -23,9 +23,10 @@ def print_commands():
         print(f'{number}: {command}')
 
 
-def check_monster_death(health: int) -> bool:
-    if health <= MIN_MONSTER_HEALTH:
-        print('Монстр побежден!')
+def check_enemy_death(health: int) -> bool:
+    if health <= MIN_ENEMY_HEALTH:
+        print('Враг побежден!')
+
         return True
     else:
         return False
@@ -34,25 +35,23 @@ def check_monster_death(health: int) -> bool:
 is_program_running = True
 
 while is_program_running:
-    print(f'Текущее здоровье монстра: {monster_health}')
+    print(f'Текущее здоровье монстра: {enemy.get_health()}')
     print()
     print_commands()
     user_command_number = input('Выберете тип оружия и укажите его номер: ').strip()
 
     if user_command_number in commands:
         if user_command_number == SWORD_ATTACK_COMMAND:
-            print(Sword().attack())
-            monster_health = monster_health - SWORD_DAMAGE
-            print(f'Нанесено {SWORD_DAMAGE} единиц урона')
+            attack_result = Sword().attack(enemy)
+            print(attack_result)
 
-            if check_monster_death(monster_health):
+            if check_enemy_death(enemy.get_health()):
                 is_program_running = False
         elif user_command_number == BOW_ATTACK_COMMAND:
-            print(Bow().attack())
-            monster_health = monster_health - BOW_DAMAGE
-            print(f'Нанесено {BOW_DAMAGE} единиц урона')
+            attack_result = Bow().attack(enemy)
+            print(attack_result)
 
-            if check_monster_death(monster_health):
+            if check_enemy_death(enemy.get_health()):
                 is_program_running = False
         elif user_command_number == EXIT_COMMAND:
             print('Выход из программы')
