@@ -35,7 +35,7 @@ def check_enemy_death(health: int) -> bool:
 is_program_running = True
 
 while is_program_running:
-    print(f'Текущее здоровье монстра: {enemy.get_health()}')
+    print(f'Текущее здоровье врага: {enemy.get_health()}')
     print()
     print_commands()
     user_command_number = input('Выберете тип оружия и укажите его номер: ').strip()
