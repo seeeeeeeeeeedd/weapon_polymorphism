@@ -6,4 +6,7 @@ class Weapon:
         self.__damage = damage
 
     def attack(self, enemy: Enemy) -> str:
-        return enemy.take_damage(self.__damage)
+        return enemy.take_damage(self.get_damage())
+
+    def get_damage(self) -> int:
+        return self.__damage
