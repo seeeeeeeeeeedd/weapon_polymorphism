@@ -43,21 +43,18 @@ while is_program_running:
 
     if user_command_number in commands:
         if user_command_number == SWORD_ATTACK_COMMAND:
-            attack_result = Sword().attack(enemy)
-            print(attack_result)
-
-            if check_enemy_death(enemy.get_health()):
-                is_program_running = False
+            weapon = Sword()
         elif user_command_number == BOW_ATTACK_COMMAND:
-            attack_result = Bow().attack(enemy)
-            print(attack_result)
-
-            if check_enemy_death(enemy.get_health()):
-                is_program_running = False
+            weapon = Bow()
         elif user_command_number == EXIT_COMMAND:
             print('Выход из программы')
             is_program_running = False
-        else:
-            print(UNKNOWN_COMMAND_MESSAGE)
+
+        if is_program_running:
+            attack_result = weapon.attack(enemy)
+            print(attack_result)
+
+            if check_enemy_death(enemy.get_health()):
+                is_program_running = False
     else:
         print(UNKNOWN_COMMAND_MESSAGE)
