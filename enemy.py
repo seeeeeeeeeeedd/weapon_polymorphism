@@ -6,3 +6,6 @@ class Enemy:
         self.__health -= damage
 
         return f'Враг получил {damage} урона. Осталось здоровья: {self.__health}'
+
+    def get_health(self) -> int:
+        return self.__health
